@@ -7,10 +7,6 @@ on:
       - '.github/workflows/build-tools.yml'
       - '.github/workflows/tools.yml'
   push:
-    paths:
-      - 'tools/**'
-      - '.github/workflows/build-tools.yml'
-      - '.github/workflows/tools.yml'
 
 permissions:
   contents: read
@@ -33,7 +29,7 @@ jobs:
       - name: Setup MacOS
         run: |
           echo "WORKPATH=/Volumes/OpenWrt" >> "$GITHUB_ENV"
-          hdiutil create -size 20g -type SPARSE -fs "Case-sensitive HFS+" -volname OpenWrt OpenWrt.sparseimage
+          hdiutil create -size 60g -type SPARSE -fs "Case-sensitive HFS+" -volname OpenWrt OpenWrt.sparseimage
           hdiutil attach OpenWrt.sparseimage
           mv "$GITHUB_WORKSPACE/openwrt" /Volumes/OpenWrt/
 
@@ -70,7 +66,7 @@ jobs:
 
       - name: Build tools MacOS
         working-directory: ${{ env.WORKPATH }}/openwrt
-        run: make tools/install -j$(nproc) BUILD_LOG=1 || ret=$? .github/workflows/scripts/show_build_failures.sh
+        run: make -j$(nproc) BUILD_LOG=1 || ret=$? .github/workflows/scripts/show_build_failures.sh
 
       - name: Upload logs
         if: always()
