@@ -10,16 +10,16 @@ PKG_NAME:=lzma
 PKG_VERSION:=22.01
 PKG_SOURCE_VERSION:=2201
 
-PKG_SOURCE:=$(PKG_NAME)$(PKG_SOURCE_VERSION).7z
-PKG_SOURCE_URL:=https://7-zip.org/a/
-PKG_HASH:=35b1689169efbc7c3c147387e5495130f371b4bad8ec24f049d28e126d52d9fe
+PKG_SOURCE:=$(PKG_NAME)$(PKG_SOURCE_VERSION).tar.xz
+PKG_SOURCE_URL:=https://github.com/lovehackintosh/Actions-OpenWrt/raw/update-kernel/
+PKG_HASH:=4eac421f429b37ac9ef360a55f47ebabb6a9e8de4502dcc8a2a1f48eb3803ecf
 
 include $(INCLUDE_DIR)/host-build.mk
 
 LZMACON=$(HOST_BUILD_DIR)/CPP/7zip/Bundles/LzmaCon
 
 define Host/Compile
-	$(MAKE) -C $(LZMACON) -f makefile.gcc
+	$(MAKE) $(HOST_JOBS) -C $(LZMACON) -f makefile.gcc
 endef
 
 define Host/Install
