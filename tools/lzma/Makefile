@@ -7,27 +7,23 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lzma
-PKG_VERSION:=4.65
+PKG_VERSION:=22.01
+PKG_SOURCE_VERSION:=2201
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-PKG_SOURCE_URL:=@OPENWRT
-PKG_HASH:=dcbdb5f4843eff638e4a5e8be0e2486a3c5483df73c70823618db8e66f609ec2
-
-HOST_BUILD_DIR:=$(BUILD_DIR_HOST)/$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE:=$(PKG_NAME)$(PKG_SOURCE_VERSION).7z
+PKG_SOURCE_URL:=https://7-zip.org/a/
+PKG_HASH:=35b1689169efbc7c3c147387e5495130f371b4bad8ec24f049d28e126d52d9fe
 
 include $(INCLUDE_DIR)/host-build.mk
 
-UTIL_DIR=$(HOST_BUILD_DIR)/C/LzmaUtil
-ALONE_DIR=$(HOST_BUILD_DIR)/CPP/7zip/Compress/LZMA_Alone
+LZMACON=$(HOST_BUILD_DIR)/CPP/7zip/Bundles/LzmaCon
 
 define Host/Compile
-	$(MAKE) -C $(UTIL_DIR) -f makefile.gcc
-	$(MAKE) -C $(ALONE_DIR) -f makefile.gcc
+	$(MAKE) -C $(LZMACON) -f makefile.gcc
 endef
 
 define Host/Install
-	$(INSTALL_DIR) $(STAGING_DIR_HOST)/bin
-	$(INSTALL_BIN) $(HOST_BUILD_DIR)/CPP/7zip/Compress/LZMA_Alone/lzma_alone $(STAGING_DIR_HOST)/bin/lzma
+	$(INSTALL_BIN) $(LZMACON)/_o/lzma $(STAGING_DIR_HOST)/bin/lzma
 endef
 
 define Host/Clean
