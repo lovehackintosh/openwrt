@@ -330,6 +330,7 @@ jobs:
         env:
           SYSTEM_CCACHE_CONF: staging_dir/host/etc/ccache.conf
         run: |
+          mkdir -p staging_dir/host/etc
           touch $SYSTEM_CCACHE_CONF
 
           echo compiler_type=gcc >> $SYSTEM_CCACHE_CONF
@@ -413,6 +414,8 @@ jobs:
 
           echo "CONFIG_TARGET_${{ inputs.target }}=y" >> .config
           echo "CONFIG_TARGET_${{ inputs.target }}_${{ inputs.subtarget }}=y" >> .config
+          echo CONFIG_BPF_TOOLCHAIN_BUILD_LLVM=y >> .config
+          echo CONFIG_PACKAGE_qosify=m >> .config
 
           make defconfig
 
