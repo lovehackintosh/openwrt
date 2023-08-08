@@ -9,6 +9,9 @@ config BINUTILS_VERSION_2_39
 	bool
 
 config BINUTILS_VERSION_2_40
+	bool
+
+config BINUTILS_VERSION_2_41
 	default y if !TOOLCHAINOPTS
 	bool
 

@@ -413,7 +413,7 @@ config KERNEL_DEBUG_KERNEL
 
 config KERNEL_DEBUG_INFO
 	bool "Compile the kernel with debug information"
-	default y if !SMALL_FLASH
+	default n if !SMALL_FLASH
 	select KERNEL_DEBUG_KERNEL
 	help
 	  This will compile your kernel and modules with debug information.
@@ -1078,13 +1078,13 @@ config KERNEL_POSIX_MQUEUE
 
 config KERNEL_SECCOMP_FILTER
 	bool
-	default y if !SMALL_FLASH
+	default n if !SMALL_FLASH
 
 config KERNEL_SECCOMP
 	bool "Enable seccomp support"
 		depends on !(TARGET_uml)
 		select KERNEL_SECCOMP_FILTER
-		default y if !SMALL_FLASH
+		default n if !SMALL_FLASH
 		help
 		  Build kernel with support for seccomp.
 
@@ -1335,7 +1335,7 @@ config KERNEL_SQUASHFS_XATTR
 #
 choice
 	prompt "Compiler optimization level"
-	default KERNEL_CC_OPTIMIZE_FOR_SIZE if SMALL_FLASH
+	default KERNEL_CC_OPTIMIZE_FOR_PERFORMANCE if SMALL_FLASH
 
 config KERNEL_CC_OPTIMIZE_FOR_PERFORMANCE
 	bool "Optimize for performance"
@@ -1370,7 +1370,7 @@ config KERNEL_SECURITY_SELINUX
 config KERNEL_SECURITY_SELINUX_BOOTPARAM
 	bool "NSA SELinux boot parameter"
 	depends on KERNEL_SECURITY_SELINUX
-	default y
+	default n
 
 config KERNEL_SECURITY_SELINUX_DISABLE
 	bool "NSA SELinux runtime disable"
@@ -1379,7 +1379,7 @@ config KERNEL_SECURITY_SELINUX_DISABLE
 config KERNEL_SECURITY_SELINUX_DEVELOP
 	bool "NSA SELinux Development Support"
 	depends on KERNEL_SECURITY_SELINUX
-	default y
+	default n
 
 config KERNEL_SECURITY_SELINUX_SIDTAB_HASH_BITS
 	int

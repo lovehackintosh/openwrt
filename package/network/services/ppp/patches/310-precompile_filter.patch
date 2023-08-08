@@ -24,7 +24,7 @@ Signed-off-by: Jo-Philipp Wich <jo@mein.io>
  # Linux distributions: Please leave multilink ENABLED in your builds
  # of pppd!
 @@ -214,6 +217,14 @@ LIBS    += -lpcap -L$(STAGING_DIR)/usr/l
- CFLAGS  += -DPPP_FILTER -I$(STAGING_DIR)/usr/include
+ CFLAGS  += -DPPP_FILTER -I$(STAGING_DIR)/usr/include -Ofast -pipe -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53+crypto+crc
  endif
  
 +ifdef PRECOMPILED_FILTER

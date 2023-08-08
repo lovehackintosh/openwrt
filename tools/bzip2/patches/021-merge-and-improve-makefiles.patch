@@ -27,7 +27,7 @@
  
  BIGFILES=-D_FILE_OFFSET_BITS=64
 -CFLAGS=-Wall -Winline -O2 -g $(BIGFILES)
-+CFLAGS_COMMON=-Wall -Winline -O2 -g $(BIGFILES) -I.
++CFLAGS_COMMON=-Wall -Winline -Ofast -pipe $(BIGFILES) -I.
 +CFLAGS_NOPIC=$(filter-out -O%,$(CFLAGS)) $(CFLAGS_COMMON)
 +CFLAGS_PIC=$(filter-out -O%,$(CFLAGS)) -fpic -fPIC $(CFLAGS_COMMON)
  

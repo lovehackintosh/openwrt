@@ -23,7 +23,7 @@ include $(INCLUDE_DIR)/meson.mk
 MESON_HOST_BUILD_DIR:=$(HOST_BUILD_DIR)/contrib/meson/openwrt-build
 
 # Always optimize for speed
-HOST_CFLAGS := $(filter-out -O%,$(HOST_CFLAGS)) -O3
+HOST_CFLAGS := $(filter-out -O%,$(HOST_CFLAGS)) -Ofast
 
 MESON_HOST_ARGS += \
 	-Ddefault_library=static \

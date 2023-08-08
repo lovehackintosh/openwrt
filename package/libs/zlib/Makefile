@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=zlib
-PKG_VERSION:=1.2.13
+PKG_VERSION:=1.3
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=https://github.com/madler/zlib/releases/download/v$(PKG_VERSION)
-PKG_HASH:=d14c38e313afc35a9a8760dadf26042f51ea0f5d154b0630a31da0540107fb98
+PKG_HASH:=8a9ba2898e1d0d774eca6ba5b4627a11e5588ba85c8851336eb38de4683050a7
 
 PKG_LICENSE:=Zlib
 PKG_LICENSE_FILES:=README
@@ -55,9 +55,7 @@ endef
 
 TARGET_CFLAGS += $(FPIC)
 
-ifeq ($(CONFIG_ZLIB_OPTIMIZE_SPEED),y)
-	TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS)) -O3
-endif
+TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS)) -Ofast -pipe -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53+crypto+crc
 
 CMAKE_OPTIONS += \
 	-DARMv8=$$$$(echo -e '\#ifdef __ARM_NEON__\nON\n\#else\nOFF\n\#endif' | $$(TARGET_CC) $$(TARGET_CFLAGS) -x c -E - | grep -xE 'ON|OFF')

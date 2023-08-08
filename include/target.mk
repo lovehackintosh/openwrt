@@ -208,7 +208,7 @@ LINUX_RECONF_DIFF = $(SCRIPT_DIR)/kconfig.pl - '>' $(call __linux_confcmd,$(filt
 ifeq ($(DUMP),1)
   BuildTarget=$(BuildTargets/DumpCurrent)
 
-  CPU_CFLAGS = -Os -pipe
+  CPU_CFLAGS = -Ofast -pipe
   ifneq ($(findstring mips,$(ARCH)),)
     ifneq ($(findstring mips64,$(ARCH)),)
       CPU_TYPE ?= mips64
@@ -251,8 +251,8 @@ ifeq ($(DUMP),1)
   endif
   ifeq ($(ARCH),aarch64)
     CPU_TYPE ?= generic
-    CPU_CFLAGS_generic = -mcpu=generic
-    CPU_CFLAGS_cortex-a53 = -mcpu=cortex-a53
+    CPU_CFLAGS_generic = -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53+crypto+crc
+    CPU_CFLAGS_cortex-a53 = -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53+crypto+crc
   endif
   ifeq ($(ARCH),arc)
     CPU_TYPE ?= arc700

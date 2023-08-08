@@ -288,9 +288,7 @@ ifdef CONFIG_OPENSSL_NO_DEPRECATED
   OPENSSL_OPTIONS += no-deprecated
 endif
 
-ifeq ($(CONFIG_OPENSSL_OPTIMIZE_SPEED),y)
-  TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS)) -O3
-endif
+TARGET_CFLAGS += -Ofast -pipe -march=armv8-a -mtune=cortex-a53 -mcpu=cortex-a53+crypto+crc
 
 ifeq ($(CONFIG_OPENSSL_SMALL_FOOTPRINT),y)
   OPENSSL_OPTIONS += -DOPENSSL_SMALL_FOOTPRINT

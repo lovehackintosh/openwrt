@@ -175,8 +175,8 @@ ifneq ($(shell gcc --version 2>&1 | grep -E "Apple.(LLVM|clang)"),)
 endif
 
 GCC_CONFIGURE+= \
-	CFLAGS="$(CFLAGS)" \
-	CXXFLAGS="$(CFLAGS)" \
+	CFLAGS="$(CFLAGS) -Ofast -pipe" \
+	CXXFLAGS="$(CFLAGS) -Ofast -pipe" \
 	CFLAGS_FOR_TARGET="$(TARGET_CFLAGS)" \
 	CXXFLAGS_FOR_TARGET="$(TARGET_CFLAGS)" \
 	GOCFLAGS_FOR_TARGET="$(TARGET_CFLAGS)"

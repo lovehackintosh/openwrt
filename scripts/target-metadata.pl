@@ -179,7 +179,7 @@ EOF
 	print <<EOF;
 choice
 	prompt "Target System"
-	default TARGET_ath79
+	default TARGET_qualcommax
 	reset if !DEVEL
 	
 EOF
@@ -384,7 +384,7 @@ EOF
 		next if @{$target->{subtargets}} > 0;
 		print "\tdefault \"".$target->{cflags}."\" if TARGET_".$target->{conf}."\n";
 	}
-	print "\tdefault \"-Os -pipe -funit-at-a-time\"\n";
+	print "\tdefault \"-Ofast -pipe -funit-at-a-time\"\n";
 	print <<EOF;
 
 config CPU_TYPE
