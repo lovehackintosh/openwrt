@@ -48,7 +48,6 @@ tools-y += gengetopt
 tools-y += gnulib
 tools-y += libressl
 tools-y += libtool
-tools-y += lzma
 tools-y += m4
 tools-y += make-ext4fs
 tools-y += meson
